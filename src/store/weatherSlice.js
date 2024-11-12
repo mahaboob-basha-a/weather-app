@@ -23,6 +23,7 @@ const weatherSlice = createSlice({
     builder
       .addCase(fetchWeather.pending, (state) => {
         state.status = 'loading';
+        state.data = null;
       })
       .addCase(fetchWeather.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -30,6 +31,7 @@ const weatherSlice = createSlice({
       })
       .addCase(fetchWeather.rejected, (state) => {
         state.status = 'failed';
+        state.data = null;
       });
   },
 });
