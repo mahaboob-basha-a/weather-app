@@ -2,6 +2,11 @@
 
 This is a React-based application that fetches weather forecast data for any city using the OpenWeatherMap API. It provides real-time updates on weather conditions such as temperature, wind speed, humidity, and sunrise/sunset times. The app supports a theme toggle and displays the forecast for the next 5 days with relevant weather details.
 
+**Demo published URL:**
+  ```bash
+   https://weather-app-git-main-mahaboob-basha-as-projects.vercel.app/
+  ```
+
 ## Features
 
 - **City-wise Weather Forecast**: Displays the weather details for any given city.
