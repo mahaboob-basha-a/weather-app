@@ -1,6 +1,7 @@
 import React from 'react'
 import { cloudIcon, humidity, pressure, sunset, wind } from '../assets/icons'
 import { useSelector } from 'react-redux'
+import Loader from './Loader'
 
 const WeatherInfo = () => {
     const weather = useSelector(store => store.weather)
@@ -19,13 +20,7 @@ const WeatherInfo = () => {
             </div>
             }
         {/* loader */}
-            { status === 'loading' && <div className='w-full items-center flex justify-center pt-9'>
-                <div className="flex gap-2">
-                    <div className="w-4 h-4 rounded-full animate-bounce bg-cyan-500"></div>
-                    <div className="w-4 h-4 rounded-full animate-bounce bg-cyan-500"></div>
-                    <div className="w-4 h-4 rounded-full animate-bounce bg-cyan-500"></div>
-                </div>
-            </div>}
+            { status === 'loading' && <Loader />}
         {/* failure */}
         { status === 'failed' && <div className='flex flex-col items-center pt-4'>
             <img src={cloudIcon} className='w-40 lg:w-56' alt="" />
@@ -49,7 +44,7 @@ const WeatherInfo = () => {
             <h1 className='text-base'>Weather Info</h1>
             {/* weather info */}
             <div className='pl-10 h-full w-full overflow-auto weather-info'>
-                {/* date wise */}
+                {/* date wise info */}
                 { data.list.slice(0, 11).map(item => {
                     const date = new Date(item.dt * 1000).toLocaleDateString().split('/').join('-')
                     const pressureData = item.main.pressure
@@ -57,43 +52,10 @@ const WeatherInfo = () => {
                     const humidityData = item.main.humidity
 
                     return (
-                        <div key={item.dt} className='p-2'>
-                    <h1 className='text-xs'>Date: {date}</h1>
-                    <div className='flex flex-wrap items-center gap-4'>
-                        {/* sunset */}
-                        <div className='flex items-center gap-2 border shadow-sm border-slate-400 p-1 rounded-md w-28'>
-                            <img src={sunset} className='w-10' alt="sunset" />
-                            <div className='flex flex-col'>
-                                <span className='text-base'> {sunsetData}</span>
-                                <span className='font-light text-base'>Sunset</span>
-                            </div>
-                        </div>
-                        {/* humidity */}
-                        <div className='flex items-center gap-2 border shadow-sm border-slate-400 p-1 rounded-md w-28'>
-                            <img src={humidity} className='w-10' alt="" />
-                            <div className='flex flex-col'>
-                                <span className='text-base'>{humidityData}</span>
-                                <span className='font-light text-base'>Humidity</span>
-                            </div>
-                        </div>
-                        {/* wind */}
-                        <div className='flex items-center gap-2 border shadow-md border-slate-400 p-1 rounded-md w-28'>
-                            <img src={wind} className='w-10' alt="" />
-                            <div className='flex flex-col'>
-                                <span className='text-base'>{windData}</span>
-                                <span className='font-light text-base'>Wind</span>
-                            </div>
-                        </div>
-                        {/* pressure */}
-                        <div className='flex items-center gap-2 border shadow-md border-slate-400 p-1 rounded-md w-28'>
-                            <img src={pressure} className='w-10' alt="" />
-                            <div className='flex flex-col'>
-                                <span className='text-base'>{pressureData}</span>
-                                <span className='font-light text-base'>Pressure</span>
-                            </div>
-                        </div>
+                    <div key={item.dt} className='p-2'>
+                        <h1 className='text-xs'>Date: {date}</h1>
+                        <WeatherInfo sunset={sunset} sunsetData={sunsetData} humidity={humidity} humidityData={humidityData} wind={wind} windData={windData} pressure={pressure} pressureData={pressureData} />
                     </div>
-                </div>
                     )
                 })}
             </div>

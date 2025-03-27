@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Weather from './components/Weather';
-import './App.css';
 
 const App = () => {
   const theme = useSelector(store=> store.theme.isDarkMode)
