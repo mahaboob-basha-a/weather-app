@@ -11,7 +11,6 @@ const WeatherInfo = () => {
     const sunsetData = data ? new Date(data.city.sunset * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) : '';
     const temperature = data ? data.list[0].main.temp: '';
     const weatherDes = data ? data.list[0].weather[0].description : '';
-    console.log("weather info component")
   return (
     <div className='w-full h-[86%]'>
         {/* Empty result */}
