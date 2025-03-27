@@ -1,16 +1,17 @@
 import React from 'react'
 import { cloudIcon, humidity, pressure, sunset, wind } from '../assets/icons'
-import { useSelector } from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 import Loader from './Loader'
+import WeatherType from './WeatherType'
 
 const WeatherInfo = () => {
-    const weather = useSelector(store => store.weather)
+    const weather = useSelector(store => store.weather,shallowEqual)
     const { data,status } = weather
     const cityName = data ? data.city.name + ', ' + data.city.country : '';
     const sunsetData = data ? new Date(data.city.sunset * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) : '';
     const temperature = data ? data.list[0].main.temp: '';
     const weatherDes = data ? data.list[0].weather[0].description : '';
-
+    console.log("weather info component")
   return (
     <div className='w-full h-[86%]'>
         {/* Empty result */}
@@ -54,7 +55,7 @@ const WeatherInfo = () => {
                     return (
                     <div key={item.dt} className='p-2'>
                         <h1 className='text-xs'>Date: {date}</h1>
-                        <WeatherInfo sunset={sunset} sunsetData={sunsetData} humidity={humidity} humidityData={humidityData} wind={wind} windData={windData} pressure={pressure} pressureData={pressureData} />
+                        <WeatherType sunset={sunset} sunsetData={sunsetData} humidity={humidity} humidityData={humidityData} wind={wind} windData={windData} pressure={pressure} pressureData={pressureData} />
                     </div>
                     )
                 })}

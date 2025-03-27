@@ -26,8 +26,7 @@ const weatherSlice = createSlice({
         state.data = null;
       })
       .addCase(fetchWeather.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.data = action.payload;
+        return {...state,status:'succeeded',data:action.payload} 
       })
       .addCase(fetchWeather.rejected, (state) => {
         state.status = 'failed';
